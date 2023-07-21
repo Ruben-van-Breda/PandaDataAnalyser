@@ -25,6 +25,12 @@ def load_file():
     uploaded_file = st.file_uploader("Upload a file", type=['csv'])
     return uploaded_file
 
+def save_file():
+    pass
+
+def load_files():
+    pass
+
 uploaded_file = load_file()
 response = ""
 def chat(df, prompt):
@@ -38,7 +44,7 @@ def chat(df, prompt):
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
-    pandas_ai = PandasAI(llm, save_charts=True, save_charts_path=f"{git_path}" , enforce_privacy=True)
+    pandas_ai = PandasAI(llm, save_charts=True, save_charts_path=f"./" , enforce_privacy=True)
     response = pandas_ai.run(df, prompt=prompt)
     return response
 
@@ -56,6 +62,7 @@ if uploaded_file is not None:
         if prompt:
             st.write("Processing query")
             response = chat_with_data(df, prompt)
+            
             print(response)
             st.write(response)
         else:
