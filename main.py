@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
+from pandasai.middlewares.streamlit import StreamlitMiddleware
 import matplotlib as mpl
 import threading
 
@@ -33,6 +34,7 @@ def load_files():
 
 uploaded_file = load_file()
 response = ""
+
 def chat(df, prompt):
     # start thread and run method chat_with_data
     thread = threading.Thread(target=chat_with_data, args=(df, prompt))
@@ -44,18 +46,9 @@ def chat(df, prompt):
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
-    pandas_ai = PandasAI(llm, save_charts=True, save_charts_path=f"{git_path}" , enforce_privacy=True)
+    pandas_ai = PandasAI(llm, middlewares=[StreamlitMiddleware()],save_charts=True, save_charts_path=f"{git_path}" , enforce_privacy=True)
     response = pandas_ai.run(df, prompt=prompt)
     return response
-
-
-textDir = st.text_input("Enter a directory")
-if st.button("View", "view"):
-    for i in os.listdir(textDir):
-        st.write(i)
-
-if st.button("Create folder", "folder"):
-    os.mkdir(textDir)
 
 
 
