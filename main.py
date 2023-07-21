@@ -14,7 +14,7 @@ import shutil
 load_dotenv()
 API_KEY = os.environ['OPENAI_API_KEY']
 git_path = "https://github.com/Ruben-van-Breda/PandaDataAnalyser/tree/main"
-git_path = "/app/pandadataanalyser"
+git_path = "/app/pandadataanalyser/"
 
 mpl.rcParams['xtick.major.pad'] = 8
 
@@ -35,14 +35,10 @@ def load_files():
 uploaded_file = load_file()
 response = ""
 
-def chat(df, prompt):
-    # start thread and run method chat_with_data
-    thread = threading.Thread(target=chat_with_data, args=(df, prompt))
-    thread.start()
-    thread.join()
-
-
-    pass
+textDir = st.text_input("Enter a directory")
+if st.button("view", "view"):
+    for l in os.listdir(path=textDir):
+        st.write(l)
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
@@ -89,7 +85,8 @@ if os.path.exists(f"{git_path}") and os.listdir(f"{git_path}"):
         curr_dir = os.getcwd()
         # delete all files in directory
         try:
-            shutil.rmtree(f"{git_path}/")
+            # shutil.rmtree(f"{git_path}/")
+            pass
             # for i in os.listdir("./picknpay/exports/charts/"):
             #     os.remove(f"{curr_dir}/picknpay/exports/charts/{i}")
             # st.sidebar.write("All files deleted")
