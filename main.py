@@ -70,7 +70,7 @@ st.sidebar.subheader("Files")
 curr_dir = os.getcwd()
 
 
-
+st.write(curr_dir)
 # check if there are files in directory
 if os.path.exists(f"{git_path}/picknpay/exports/charts/") and os.listdir(f"{git_path}/picknpay/exports/charts/"):
 
