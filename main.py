@@ -79,11 +79,6 @@ st.sidebar.subheader("Files")
 curr_dir = os.getcwd()
 
 
-st.write(curr_dir)
-
-for i in os.listdir(curr_dir):
-    st.write(i)
-
 # check if there are files in directory
 if os.path.exists(f"{git_path}/exports/charts/") and os.listdir(f"{git_path}/exports/charts/"):
 
