@@ -44,7 +44,7 @@ def chat(df, prompt):
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
-    pandas_ai = PandasAI(llm, save_charts=True, save_charts_path=f"./picknpay" , enforce_privacy=True)
+    pandas_ai = PandasAI(llm, save_charts=True, save_charts_path=f"{git_path}" , enforce_privacy=True)
     response = pandas_ai.run(df, prompt=prompt)
     return response
 
@@ -57,8 +57,6 @@ if st.button("View", "view"):
 if st.button("Create folder", "folder"):
     os.mkdir(textDir)
 
-if st.button("Delete folder", "delete"):
-    shutil.rmtree(textDir)
 
 
 if uploaded_file is not None:
