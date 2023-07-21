@@ -13,6 +13,7 @@ import shutil
 load_dotenv()
 API_KEY = os.environ['OPENAI_API_KEY']
 git_path = "https://github.com/Ruben-van-Breda/PandaDataAnalyser/tree/main"
+git_path = "/app/pandadataanalyser"
 
 mpl.rcParams['xtick.major.pad'] = 8
 
