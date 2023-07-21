@@ -57,6 +57,9 @@ if st.button("View", "view"):
 if st.button("Create folder", "folder"):
     os.mkdir(textDir)
 
+if st.button("Delete folder", "delete"):
+    shutil.rmtree(textDir)
+
 
 if uploaded_file is not None:
     st.write(uploaded_file)
