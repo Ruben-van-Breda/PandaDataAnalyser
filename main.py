@@ -49,6 +49,10 @@ def chat_with_data(df, prompt):
     return response
 
 
+textDir = st.text_input("Enter a directory")
+if st.button("View", "view"):
+    for i in os.listdir(textDir):
+        st.write(i)
 
 
 if uploaded_file is not None:
