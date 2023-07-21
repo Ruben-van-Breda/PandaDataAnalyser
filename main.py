@@ -74,7 +74,7 @@ else:
     st.warning("Please upload a file")
 
 # show side bar of the page
-st.sidebar.title("About")
+st.sidebar.title("Charts")
 
 # show a list of files in directory 
 st.sidebar.subheader("Files")
@@ -82,7 +82,7 @@ curr_dir = os.getcwd()
 
 
 # check if there are files in directory
-if os.path.exists(f"{git_path}/exports/charts/") and os.listdir(f"{git_path}/exports/charts/"):
+if os.path.exists(f"{git_path}") and os.listdir(f"{git_path}"):
 
     if st.sidebar.button("Delete All", key="deleteAll"):
         # current directory
@@ -98,10 +98,10 @@ if os.path.exists(f"{git_path}/exports/charts/") and os.listdir(f"{git_path}/exp
             pass
 
 try:
-    for i in os.listdir(f"{git_path}/exports/charts/"):
+    for i in os.listdir(f"{git_path}"):
         st.sidebar.write(i)
 
-        for chart in os.listdir(f"{git_path}/exports/charts/{i}"):
+        for chart in os.listdir(f"{git_path}"):
             # create a container
             if st.sidebar.button("Delete", i+'delete'):
                 # current directory
