@@ -6,7 +6,7 @@ from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 import matplotlib as mpl
 import threading
-import tkinter
+
 import webbrowser
 import shutil
 
