@@ -46,8 +46,9 @@ def chat(df, prompt):
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
-    # save_charts=True, save_charts_path=f"{git_path}"
-    pandas_ai = PandasAI(llm, middlewares=[StreamlitMiddleware()] , enforce_privacy=True)
+    # 
+    pandas_ai = PandasAI(llm, middlewares=[StreamlitMiddleware()], save_charts=True,
+                         save_charts_path="/", enforce_privacy=True)
     response = pandas_ai.run(df, prompt=prompt)
     return response
 
