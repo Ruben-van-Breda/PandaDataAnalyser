@@ -15,15 +15,18 @@ load_dotenv()
 API_KEY = os.environ['OPENAI_API_KEY']
 git_path = "https://github.com/Ruben-van-Breda/PandaDataAnalyser/tree/main"
 git_path = "/app/pandadataanalyser/"
+git_path = "./"
 
 mpl.rcParams['xtick.major.pad'] = 8
 
 st.set_page_config(page_title="Pick n Pay", page_icon="🦌", layout="wide")
-st.title("Pick n Pay")
+st.title("Data Analyiser")
 
 st.cache(allow_output_mutation=True, persist=False)
 def load_file():
-    uploaded_file = st.file_uploader("Upload a file", type=['csv'])
+    uploaded_file = st.file_uploader("Upload a file", type=['csv', 'xlsx'])
+
+
     return uploaded_file
 
 def save_file():
@@ -35,16 +38,16 @@ def load_files():
 uploaded_file = load_file()
 response = ""
 
-textDir = st.text_input("Enter a directory")
-if st.button("view", "view"):
-    for l in os.listdir(path=textDir):
-        st.write(l)
+# textDir = st.text_input("Enter a directory")
+# if st.button("view", "view"):
+#     for l in os.listdir(path=textDir):
+#         st.write(l)
 
 def chat_with_data(df, prompt):
     llm = OpenAI(api_token=API_KEY)
     # 
     pandas_ai = PandasAI(llm, middlewares=[StreamlitMiddleware()], save_charts=True,
-                         save_charts_path=f"{git_path}", enforce_privacy=True)
+                         save_charts_path=f"{git_path}/picknpay", enforce_privacy=True)
     response = pandas_ai.run(df, prompt=prompt)
     return response
 
@@ -52,7 +55,11 @@ def chat_with_data(df, prompt):
 
 if uploaded_file is not None:
     st.write(uploaded_file)
-    df = pd.read_csv(uploaded_file)
+    # check file extension
+    if uploaded_file.name.endswith('.csv'):
+        df = pd.read_csv(uploaded_file)
+    else:
+        df = pd.read_excel(uploaded_file)
     st.write(df)
 
     prompt = st.text_area("Enter you query")
